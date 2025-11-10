@@ -6,6 +6,11 @@
     --deep-purple: #a688da;
     --dark: #263238;
     --white: #ffffff;
+    /* Neutrals & focus (for future scalability) */
+    --gray-50: #fafbfc;
+    --gray-100: #f0f3f5;
+    --gray-300: #d2d7db;
+    --focus-ring: #ffca28;
 }
 
 body {
@@ -59,6 +64,11 @@ header {
     color: var(--green);
 }
 
+.nav-links a:focus-visible {
+    outline: 3px solid rgba(255,255,255,0.85);
+    outline-offset: 2px;
+}
+
 #hero {
     background: linear-gradient(90deg, var(--blue) 0%, var(--coral) 50%, var(--green) 100%);
     color: var(--white);
@@ -71,11 +81,13 @@ header {
     margin-bottom: 1rem;
     font-weight: 700;
     letter-spacing: 1px;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.35);
 }
 
 .hero-content p {
     font-size: 1.2rem;
     margin-bottom: 2rem;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.3);
 }
 
 .btn {
@@ -91,6 +103,11 @@ header {
 
 .btn:hover {
     background: var(--coral);
+}
+
+.btn:focus-visible {
+    outline: 3px solid var(--white);
+    outline-offset: 2px;
 }
 
 .topics,
@@ -114,11 +131,25 @@ header {
 }
 
 .topic-card {
-    color: var(--white);
+    /* Light accent backgrounds need dark text for contrast */
+    color: var(--dark);
     border-radius: 10px;
     padding: 1.5rem;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
+}
+
+.topic-cta {
+    display: inline-block;
+    margin-top: 0.9rem;
+    font-weight: 600;
+    color: var(--dark);
+    text-decoration: underline;
+}
+.topic-cta:hover { color: #111; }
+.topic-cta:focus-visible {
+    outline: 3px solid var(--focus-ring);
+    outline-offset: 2px;
 }
 
 .aws-topic-card{
@@ -148,6 +179,111 @@ header {
     padding: 1.5rem;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
+}
+
+/* === Learning Card Multi-topic Layout === */
+.learning-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.learning-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.25);
+    padding-bottom: 0.25rem;
+}
+
+.learning-card-header h3 {
+    /* Override generic .updates h3 */
+    background: transparent;
+    color: var(--white);
+    text-align: left;
+    display: inline;
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+    font-size: 1.2rem;
+    letter-spacing: 0.5px;
+}
+
+.learning-date {
+    font-size: 0.75rem;
+    background: rgba(255,255,255,0.15);
+    padding: 0.35rem 0.55rem;
+    border-radius: 6px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.learning-topics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.75rem;
+}
+
+.learning-topic {
+    background: rgba(255,255,255,0.07);
+    border-radius: 10px;
+    padding: 0.85rem 0.9rem 0.9rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    transition: background 0.3s, transform 0.3s;
+}
+
+.learning-topic h4 {
+    margin: 0 0 0.4rem;
+    font-size: 0.95rem;
+    line-height: 1.3;
+}
+
+.learning-topic p {
+    margin: 0;
+    font-size: 0.75rem;
+    line-height: 1.4;
+    opacity: 0.95;
+}
+
+/* Color accents mapped to existing palette */
+.topic-aws { border-left: 6px solid var(--blue); }
+.topic-fullstack { border-left: 6px solid var(--coral); }
+.topic-security { border-left: 6px solid var(--green); }
+
+.learning-topic:hover {
+    background: rgba(255,255,255,0.12);
+    transform: translateY(-3px);
+}
+
+/* Mobile adjustments */
+@media (max-width: 600px) {
+    .learning-topics { grid-template-columns: 1fr; }
+    .learning-topic { padding: 0.8rem 0.85rem; }
+    .learning-card-header h3 { font-size: 1.05rem; }
+}
+
+.aws-update {
+    background: var(--blue);
+    color: var(--dark);
+    border-radius: 10px;
+    padding: 1.3rem;
+
+}
+.fullstack-update {
+    background: var(--coral);
+    color: var(--dark);
+    border-radius: 10px;
+    padding: 1.3rem;
+}
+.security-update {
+    background: var(--green);
+    color: var(--dark);
+    border-radius: 10px;
+    padding: 1.3rem;
 }
 
 .topic-card:hover,
@@ -232,17 +368,27 @@ footer {
 @media (max-width: 768px) {
     .navbar {
         flex-direction: column;
+        align-items: stretch;
         padding: 1rem;
     }
 
     .nav-links li {
-        margin: 0 0.5rem;
+        margin: 0.25rem 0.5rem;
     }
 
     .topics,
     .updates {
         padding: 2rem 1rem;
     }
+
+    .nav-toggle { display: inline-flex; align-self: flex-end; }
+    /* Collapse nav by default on mobile */
+    .nav-links {
+        display: none;
+        padding: 0.5rem 0;
+    }
+    .nav-links.open { display: block; }
+    .nav-links li { display: block; text-align: right; }
 }
 
 @media (max-width: 480px) {
