@@ -15,12 +15,30 @@
     --btn-text: var(--white);
 }
 
+html {
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+.nav-links {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 body {
     font-family: "Poppins", sans-serif;
     margin: 0;
     background-color: var(--white);
     color: var(--navy);
     line-height: 1.6;
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 header {
@@ -63,7 +81,20 @@ header {
     transition: color 0.2s;
 }
 
-.nav-links a:hover {
+.menu-toggle{
+    display: none;
+    background: transparent;
+    border: none;
+    color: var(--white);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.nav-links li:first-child a:hover {
+    color: var(--blue);
+}
+
+.nav-links li:nth-child(2) a:hover {
     color: var(--green);
 }
 
