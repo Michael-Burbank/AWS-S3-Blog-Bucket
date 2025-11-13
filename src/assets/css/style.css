@@ -203,11 +203,11 @@ header {
 }
 
 .fullstack-topic-card {
-    background: var(--rose);
+    background: var(--green);
 }
 
 .security-topic-card {
-    background: var(--green);
+    background: var(--rose);
 }
 
 .update-card {
@@ -295,11 +295,11 @@ header {
 }
 
 .topic-fullstack {
-    border-left: 6px solid var(--rose);
+    border-left: 6px solid var(--green);
 }
 
 .topic-security {
-    border-left: 6px solid var(--green);
+    border-left: 6px solid var(--rose);
 }
 
 .learning-topic:hover {
