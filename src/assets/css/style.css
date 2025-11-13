@@ -307,21 +307,6 @@ header {
     transform: translateY(-3px);
 }
 
-/* Mobile adjustments */
-@media (max-width: 600px) {
-    .learning-topics {
-        grid-template-columns: 1fr;
-    }
-
-    .learning-topic {
-        padding: 0.8rem 0.85rem;
-    }
-
-    .learning-card-header h3 {
-        font-size: 1.05rem;
-    }
-}
-
 .topic-card:hover,
 .update-card:hover {
     transform: translateY(-5px);
@@ -368,18 +353,6 @@ footer {
     padding: 4rem 1.5rem;
     border-radius: 10px;
     margin-bottom: 2rem;
-}
-
-.aws-header {
-    background: linear-gradient(135deg, var(--blue), var(--green));
-}
-
-.fullstack-header {
-    background: linear-gradient(135deg, var(--green), var(--rose));
-}
-
-.security-header {
-    background: linear-gradient(135deg, var(--rose), var(--blue));
 }
 
 .topic-content {
