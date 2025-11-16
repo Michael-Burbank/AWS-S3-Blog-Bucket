@@ -397,7 +397,30 @@ footer {
     }
 }
 
+@media (max-width: 769px) {
+    .nav-links{
+        display: flex !important;
+        position: static;
+        background: transparent;
+        padding: 0;
+        box-shadow: none;
+    }
+
+    .nav-links li {
+        display: inline-block;
+        margin: 0 1rem;
+        text-align: initial;
+    }
+}
+
 @media (max-width: 768px) {
+
+    h1.logo{
+        /* text-align: center;
+        justify-content: center; */
+        margin: auto;
+    }
+
     .navbar {
         position: fixed;
         top: 0;
@@ -415,6 +438,10 @@ footer {
         z-index: 1000;
     }
 
+    .menu-toggle {
+        display: block;
+    }
+
     .nav-links li {
         margin: 0.25rem 0.5rem;
     }
@@ -425,13 +452,34 @@ footer {
     }
 
     .nav-links {
-        padding: 0.5rem 0;
+        padding: 1rem 1.5rem;
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        left: 0;
+        background: var(--slate);
+        box-shadow: 0 8px 20px rgba (0, 0, 0, 0.15);
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+        z-index: 999;
+        transition: transform 0.2s ease, opacity 0.2s ease;
+
+    }
+
+    .nav-links-open{
+        display: block;
     }
 
     .nav-links li {
         display: block;
         text-align: right;
+        margin: 0.5rem 0;
     }
+    .nav-links a {
+        padding: 0.45rem 0;
+        display: block;
+}
 }
 
 @media (max-width: 480px) {
