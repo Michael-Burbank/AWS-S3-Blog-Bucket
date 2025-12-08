@@ -224,8 +224,8 @@ header {
 
 .learning-card-header {
     display: flex;
-    justify-content: space-between;
-    align-items: baseline;
+    justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
     gap: 0.5rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.25);
@@ -245,12 +245,15 @@ header {
 }
 
 .learning-date {
-    font-size: 0.75rem;
+    font-size: 1rem;
     background: rgba(255, 255, 255, 0.15);
     padding: 0.35rem 0.55rem;
+    margin-bottom: 1.2rem;
     border-radius: 6px;
     font-weight: 600;
-    letter-spacing: 0.5px;
+    letter-spacing: 4px;
+    text-align: center;
+    justify-content: center;
 }
 
 .learning-topics {
@@ -318,20 +321,6 @@ header {
     font-weight: 600;
 }
 
-.topic-card p,
-.update-card p {
-    margin: 0;
-}
-
-footer {
-    text-align: center;
-    padding: 1.5rem;
-    background: var(--navy);
-    color: var(--white);
-    font-size: 1rem;
-    margin-top: 2rem;
-}
-
 /* Topic Page Styling */
 .topic-page {
     padding: 3rem 2rem;
@@ -354,6 +343,20 @@ footer {
 .nav-links a.active {
     font-weight: 700;
     border-bottom: 2px solid var(--white);
+}
+
+.topic-card p,
+.update-card p {
+    margin: 0;
+}
+
+footer {
+    text-align: center;
+    padding: 4rem;
+    background: var(--navy);
+    color: var(--white);
+    font-size: 1rem;
+    margin-top: 2rem;
 }
 
 /* ====== Responsive ====== */
@@ -397,7 +400,7 @@ footer {
         position: absolute;
         top: 100%;
         right: 0;
-        /* left: 0; */
+        left: 0;
         padding: 1rem 1.5rem;
         background: var(--slate-dark);
         backdrop-filter: blur(50px);
@@ -415,13 +418,50 @@ footer {
 
     .nav-links li {
         display: block;
-        text-align: right;
+        text-align: center;
         margin: 0.5rem 0;
     }
+
+    .nav-links .aws-li, .nav-links .fullstack-li, .nav-links .security-li {
+        width: 75%;
+        margin: auto;
+        border-radius: 20px;
+    }
+    .nav-links li:first-child a:hover {
+    color: var(--white);
+    }
+
+    .nav-links .aws-li:hover {
+        background: var(--blue);
+    }
+
+
+    .nav-links li:nth-child(2) a:hover {
+        color: var(--white);
+    }
+
+    .nav-links .fullstack-li:hover {
+        background: var(--green);
+    }
+    .nav-links li:last-child a:hover {
+        color: var(--white);
+    }
+
+    .nav-links .security-li:hover {
+        background: var(--rose);
+    }
+
+    .nav-links li:last-child a:hover {
+        color: var(--white);
+    }
+    
 
     .nav-links a {
         display: block;
         padding: 0.45rem 0;
+    }
+    .nav-links a:hover {
+        color: var(--white);
     }
 }
 
