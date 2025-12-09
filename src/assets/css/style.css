@@ -1,20 +1,38 @@
 :root {
-    --blue: #0ea5e9;
-    --green: #10b981;
-    --rose: #f43f5e;
+    /* Base palette */
+    --white: #ffffff;
+    --navy: #0f172a;
     --slate: #374151;
     --slate-dark: #1f2937;
-    --navy: #0f172a;
-    --white: #ffffff;
-    --gray-50: #f8fafc;
-    --gray-100: #f1f5f9;
-    --gray-300: #cbd5e1;
-    --amber: #ffca28;
+
+    --blue: #0ea5e9;   /* AWS */
+    --green: #10b981;  /* DevOps */
+    --amber: #ffca28;  /* Full Stack */
+    --rose: #f43f5e;   /* Security */
+
+    /* Buttons */
     --btn-bg: var(--slate);
     --btn-hover: var(--slate-dark);
     --btn-text: var(--white);
+
+    /* Muted brand shades (modern browsers) */
+    --blue-muted: color-mix(in srgb, var(--blue) 55%, var(--navy) 45%);
+    --green-muted: color-mix(in srgb, var(--green) 55%, var(--navy) 45%);
+    --amber-muted: color-mix(in srgb, var(--amber) 55%, var(--navy) 45%);
+    --rose-muted: color-mix(in srgb, var(--rose) 55%, var(--navy) 45%);
 }
 
+/* Fallback for older browsers without color-mix */
+@supports not (color: color-mix(in srgb, red, black)) {
+    :root {
+        --blue-muted: #0b7fb3;
+        --green-muted: #0a8a67;
+        --amber-muted: #cc9f20;
+        --rose-muted: #c5324b;
+    }
+}
+
+/* Base */
 html {
     box-sizing: border-box;
     overflow-x: hidden;
@@ -36,6 +54,7 @@ body {
     overflow-x: hidden;
 }
 
+/* Header / Nav */
 header {
     background: var(--slate);
     color: var(--white);
@@ -57,6 +76,7 @@ header {
     font-size: 1.7rem;
     font-weight: 700;
     letter-spacing: 1px;
+    margin: 0;
 }
 
 .nav-links {
@@ -76,45 +96,46 @@ header {
     color: var(--white);
     text-decoration: none;
     font-weight: 500;
-    transition: color 0.2s;
+    transition: color 0.2s ease;
 }
 
 .menu-toggle {
-    display: none;
+    display: none; /* shown below 768px */
     background: transparent;
     border: none;
     color: var(--white);
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     cursor: pointer;
 }
 
-.nav-links li:first-child a:hover {
-    color: var(--blue);
-}
-
-.nav-links li:nth-child(2) a:hover {
-    color: var(--green);
-}
-
-.nav-links li:last-child a:hover {
-    color: var(--rose);
-}
+/* Link hovers (desktop) */
+/* Order in HTML: AWS, DevOps, Full Stack, Security */
+.nav-links li:first-child a:hover { color: var(--blue); }     /* AWS */
+.nav-links li:nth-child(2) a:hover { color: var(--green); }   /* DevOps -> green */
+.nav-links li:nth-child(3) a:hover { color: var(--amber); }   /* Full Stack -> amber */
+.nav-links li:last-child a:hover { color: var(--rose); }      /* Security */
 
 .nav-links a:focus-visible {
     outline: 3px solid rgba(255, 255, 255, 0.85);
     outline-offset: 2px;
 }
 
+/* Hero */
 #hero {
-    background: linear-gradient(90deg, var(--blue) 0%, var(--green) 50%, var(--rose) 100%);
+    position: relative;
     color: var(--white);
     padding: 7rem 2rem;
     text-align: center;
+
+    /* professional: muted brand gradient + strong navy overlay for contrast */
+    background:
+      linear-gradient(to bottom, rgba(15, 23, 42, 0.94), rgba(15, 23, 42, 0.85)),
+      linear-gradient(135deg, var(--blue-muted) 0%, var(--green-muted) 33%, var(--amber-muted) 66%, var(--rose-muted) 100%);
 }
 
 .hero-content h2 {
     font-size: 2.5rem;
-    margin-bottom: 1rem;
+    margin: 0 0 1rem;
     font-weight: 700;
     letter-spacing: 1px;
     text-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
@@ -122,23 +143,37 @@ header {
 
 .hero-content p {
     font-size: 1.2rem;
-    margin-bottom: 2rem;
+    margin: 0 0 2rem;
     text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
 }
 
+/* Buttons */
 .btn {
     background: var(--btn-bg);
     color: var(--btn-text);
     padding: 0.8rem 1.2rem;
-    border-radius: 5px;
+    border-radius: 6px;
     text-decoration: none;
     font-weight: 600;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    transition: background 0.2s;
+    transition: background 0.2s ease;
 }
 
+/* Global hover (non-hero) */
 .btn:hover {
     background: var(--btn-hover);
+}
+
+/* Hero-only lighter hover */
+#hero .btn:hover {
+    background: color-mix(in srgb, var(--btn-bg) 70%, white 30%);
+}
+
+/* Fallback for browsers without color-mix */
+@supports not (color: color-mix(in srgb, red, black)) {
+    #hero .btn:hover {
+        background: #526072; /* lighter slate approximation */
+    }
 }
 
 .btn:focus-visible {
@@ -146,6 +181,7 @@ header {
     outline-offset: 2px;
 }
 
+/* Sections */
 .topics,
 .updates {
     padding: 3rem 2rem;
@@ -154,11 +190,12 @@ header {
 .topics h2,
 .updates h2 {
     text-align: center;
-    margin-bottom: 2rem;
+    margin: 0 0 2rem;
     font-size: 2rem;
     font-weight: 600;
 }
 
+/* Grids */
 .topic-grid,
 .update-grid {
     display: grid;
@@ -166,12 +203,27 @@ header {
     gap: 1.5rem;
 }
 
+/* Cards */
 .topic-card {
     color: var(--navy);
     border-radius: 10px;
     padding: 1.5rem;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
+}
+
+.topic-card:hover,
+.update-card:hover {
+    transform: translateY(-5px);
+}
+
+.topic-card h3 {
+    margin: 0 0 0.7rem;
+    font-weight: 600;
+    font-size: 1.4rem;
+    text-align: center;
+    padding-bottom: 0.4rem;
+    border-bottom: 3px solid var(--slate-dark);
 }
 
 .topic-cta {
@@ -183,7 +235,7 @@ header {
 }
 
 .topic-cta:hover {
-    color: #1c24349b;
+    color: #1c2434;
     text-decoration: underline;
 }
 
@@ -192,17 +244,11 @@ header {
     outline-offset: 2px;
 }
 
-.aws-topic-card {
-    background: var(--blue);
-}
-
-.fullstack-topic-card {
-    background: var(--green);
-}
-
-.security-topic-card {
-    background: var(--rose);
-}
+/* Topic color blocks */
+.aws-topic-card { background: var(--blue); }
+.dev_ops-topic-card { background: var(--green); }   /* DevOps -> green */
+.fullstack-topic-card { background: var(--amber); } /* Full Stack -> amber */
+.security-topic-card { background: var(--rose); }
 
 .update-card {
     background: var(--slate-dark);
@@ -212,6 +258,11 @@ header {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
     z-index: 1;
+}
+
+.topic-card p,
+.update-card p {
+    margin: 0;
 }
 
 /* === Learning Card Multi-topic Layout === */
@@ -272,6 +323,11 @@ header {
     transition: background 0.3s, transform 0.3s;
 }
 
+.learning-topic:hover {
+    background: rgba(255, 255, 255, 0.12);
+    transform: translateY(-3px);
+}
+
 .learning-topic h4 {
     margin: 0 0 0.4rem;
     font-size: 0.95rem;
@@ -286,45 +342,13 @@ header {
 }
 
 /* Color accents mapped to existing palette */
-.topic-aws {
-    border-left: 6px solid var(--blue);
-}
+.topic-aws { border-left: 6px solid var(--blue); }
+.topic-devops { border-left: 6px solid var(--green); }      /* DevOps -> green */
+.topic-fullstack { border-left: 6px solid var(--amber); }   /* Full Stack -> amber */
+.topic-security { border-left: 6px solid var(--rose); }
 
-.topic-fullstack {
-    border-left: 6px solid var(--green);
-}
-
-.topic-security {
-    border-left: 6px solid var(--rose);
-}
-
-.learning-topic:hover {
-    background: rgba(255, 255, 255, 0.12);
-    transform: translateY(-3px);
-}
-
-.topic-card:hover,
-.update-card:hover {
-    transform: translateY(-5px);
-}
-
-.topic-card h3 {
-    margin-top: 0;
-    margin-bottom: 0.7rem;
-    font-weight: 600;
-    font-size: 1.4rem;
-}
-
-.update-card h4 {
-    margin-top: 0;
-    margin-bottom: 0.7rem;
-    font-weight: 600;
-}
-
-/* Topic Page Styling */
-.topic-page {
-    padding: 3rem 2rem;
-}
+/* Topic page */
+.topic-page { padding: 3rem 2rem; }
 
 .topic-header {
     text-align: center;
@@ -345,11 +369,7 @@ header {
     border-bottom: 2px solid var(--white);
 }
 
-.topic-card p,
-.update-card p {
-    margin: 0;
-}
-
+/* Footer */
 footer {
     text-align: center;
     padding: 4rem;
@@ -363,6 +383,8 @@ footer {
 
 /* Desktop and up */
 @media (min-width: 769px) {
+    .menu-toggle { display: none; }
+
     .nav-links {
         display: flex;
         position: static;
@@ -380,19 +402,10 @@ footer {
 
 /* Tablet/phone */
 @media (max-width: 768px) {
-    
-    h1.logo {
-        margin: auto;
-    }
+    h1.logo { margin: auto; }
+    .menu-toggle { display: block; }
 
-    .menu-toggle {
-        display: block;
-    }
-
-    .topics,
-    .updates {
-        padding: 2rem 1rem;
-    }
+    .topics, .updates { padding: 2rem 1rem; }
 
     /* Dropdown panel (hidden by default) */
     .nav-links {
@@ -401,70 +414,59 @@ footer {
         top: 100%;
         right: 0;
         left: 0;
-        padding: 1rem 1.5rem;
+        padding: 1rem 1.25rem;
         background: var(--slate-dark);
-        backdrop-filter: blur(50px);
+        backdrop-filter: blur(24px);
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-        border-bottom-left-radius: 8px;
-        border-bottom-right-radius: 8px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
         z-index: 999;
         transition: transform 0.2s ease, opacity 0.2s ease;
     }
 
     /* Shown when JS toggles this class */
-    .nav-links-open {
-        display: block;
-    }
+    .nav-links.nav-links-open { display: block; }
 
+    /* Stacked items */
     .nav-links li {
         display: block;
         text-align: center;
         margin: 0.5rem 0;
     }
 
-    .nav-links .aws-li, .nav-links .fullstack-li, .nav-links .security-li {
-        width: 75%;
-        margin: auto;
-        border-radius: 20px;
-    }
-    .nav-links li:first-child a:hover {
-    color: var(--white);
-    }
-
-    .nav-links .aws-li:hover {
-        background: var(--blue);
-    }
-
-
-    .nav-links li:nth-child(2) a:hover {
-        color: var(--white);
-    }
-
-    .nav-links .fullstack-li:hover {
-        background: var(--green);
-    }
-    .nav-links li:last-child a:hover {
-        color: var(--white);
-    }
-
-    .nav-links .security-li:hover {
-        background: var(--rose);
-    }
-
-    .nav-links li:last-child a:hover {
-        color: var(--white);
-    }
-    
-
     .nav-links a {
         display: block;
-        padding: 0.45rem 0;
+        padding: 0.5rem 0.25rem;
     }
-    .nav-links a:hover {
-        color: var(--white);
+
+    /* Optional colorful hover chips */
+    .nav-links .aws-li,
+    .nav-links .dev_ops-li,
+    .nav-links .fullstack-li,
+    .nav-links .security-li {
+        width: 75%;
+        margin: 0.25rem auto;
+        border-radius: 20px;
     }
+
+    /* AWS */
+    .nav-links li:first-child a:hover { color: var(--white); }
+    .nav-links .aws-li:hover { background: var(--blue); }
+
+    /* DevOps -> green */
+    .nav-links li:nth-child(2) a:hover { color: var(--white); }
+    .nav-links .dev_ops-li:hover { background: var(--green); }
+
+    /* Full Stack -> amber */
+    .nav-links li:nth-child(3) a:hover { color: var(--white); }
+    .nav-links .fullstack-li:hover { background: var(--amber); }
+
+    /* Security */
+    .nav-links li:last-child a:hover { color: var(--white); }
+    .nav-links .security-li:hover { background: var(--rose); }
 }
 
+/* Medium screens tweak */
 @media (max-width: 1200px) {
     .topic-grid,
     .update-grid {
@@ -472,27 +474,11 @@ footer {
     }
 }
 
+/* Small phones */
 @media (max-width: 480px) {
-    .topic-header {
-        padding: 2rem 1rem;
-    }
-
-    .topic-content {
-        grid-template-columns: 1fr;
-        padding: 1rem;
-    }
-
-    .hero-content h2 {
-        font-size: 1.5rem;
-    }
-
-    .topics h2,
-    .updates h2 {
-        font-size: 1.2rem;
-    }
-
-    .topic-card,
-    .update-card {
-        padding: 1rem;
-    }
+    .topic-header { padding: 2rem 1rem; }
+    .topic-content { grid-template-columns: 1fr; padding: 1rem; }
+    .hero-content h2 { font-size: 1.5rem; }
+    .topics h2, .updates h2 { font-size: 1.2rem; }
+    .topic-card, .update-card { padding: 1rem; }
 }
