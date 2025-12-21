@@ -94,3 +94,51 @@ if (btn && nav) {
     // Ensure correct initial state
     onResize();
 })();
+
+// Reorder update cards so newest appear first (earliest at the back)
+document.addEventListener('DOMContentLoaded', () => {
+    const container = document.querySelector('.update-grid');
+    if (!container) return;
+
+    const cards = Array.from(container.querySelectorAll('.update-card'));
+    if (cards.length <= 1) return;
+
+    const parseTimestamp = (card) => {
+        // 1) Prefer data-date attribute if present (ISO recommended: YYYY-MM-DD)
+        const dataDate = card.getAttribute('data-date');
+        if (dataDate) {
+            const t = Date.parse(dataDate);
+            if (!Number.isNaN(t)) return t;
+        }
+        // 2) Look for a <time datetime="..."> element
+        const timeEl = card.querySelector('time[datetime]');
+        if (timeEl && timeEl.getAttribute('datetime')) {
+            const t = Date.parse(timeEl.getAttribute('datetime'));
+            if (!Number.isNaN(t)) return t;
+        }
+        // 3) Fallback: parse visible text in .learning-date (e.g., "December 10, 2025")
+        const dateEl = card.querySelector('.learning-date');
+        if (dateEl && dateEl.textContent) {
+            const t = Date.parse(dateEl.textContent.trim());
+            if (!Number.isNaN(t)) return t;
+        }
+        return NaN;
+    };
+
+    const withMeta = cards.map((el, idx) => ({ el, idx, ts: parseTimestamp(el) }));
+    // Sort by timestamp desc (newest first). Unknown dates (NaN) go last. Stable by original index.
+    withMeta.sort((a, b) => {
+        const aKnown = Number.isFinite(a.ts);
+        const bKnown = Number.isFinite(b.ts);
+        if (aKnown && bKnown) {
+            if (b.ts !== a.ts) return b.ts - a.ts;
+            return a.idx - b.idx;
+        }
+        if (aKnown && !bKnown) return -1;
+        if (!aKnown && bKnown) return 1;
+        return a.idx - b.idx;
+    });
+
+    // Re-append in sorted order
+    withMeta.forEach(({ el }) => container.appendChild(el));
+});

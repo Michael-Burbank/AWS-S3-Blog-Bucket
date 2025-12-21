@@ -113,7 +113,7 @@ header {
 .nav-links li:first-child a:hover { color: var(--blue); }     /* AWS */
 .nav-links li:nth-child(2) a:hover { color: var(--green); }   /* DevOps -> green */
 .nav-links li:nth-child(3) a:hover { color: var(--amber); }   /* Full Stack -> amber */
-.nav-links li:last-child a:hover { color: var(--rose); }      /* Security */
+/* .nav-links li:last-child a:hover { color: var(--rose); }      Security */
 
 .nav-links a:focus-visible {
     outline: 3px solid rgba(255, 255, 255, 0.85);
@@ -129,8 +129,8 @@ header {
 
     /* professional: muted brand gradient + strong navy overlay for contrast */
     background:
-      linear-gradient(to bottom, rgba(15, 23, 42, 0.94), rgba(15, 23, 42, 0.85)),
-      linear-gradient(135deg, var(--blue-muted) 0%, var(--green-muted) 33%, var(--amber-muted) 66%, var(--rose-muted) 100%);
+    linear-gradient(to bottom, rgba(15, 23, 42, 0.94), rgba(15, 23, 42, 0.85)),
+    linear-gradient(135deg, var(--blue-muted) 0%, var(--green-muted) 33%, var(--amber-muted) 66%, var(--rose-muted) 100%);
 }
 
 .hero-content h2 {
@@ -199,7 +199,7 @@ header {
 .topic-grid,
 .update-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 1.5rem;
 }
 
@@ -258,6 +258,7 @@ header {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
     z-index: 1;
+    max-width: 100%;
 }
 
 .topic-card p,
@@ -481,4 +482,58 @@ footer {
     .hero-content h2 { font-size: 1.5rem; }
     .topics h2, .updates h2 { font-size: 1.2rem; }
     .topic-card, .update-card { padding: 1rem; }
+}
+
+/* ====== Rest day & badges ====== */
+.learning-card.rest-day {
+    background: var(--slate-dark);
+    color: var(--white);
+    border: none;
+}
+
+.learning-card.rest-day .learning-card-header {
+    border-bottom-color: rgba(255, 255, 255, 0.25);
+}
+
+.learning-card.rest-day .learning-date {
+    background: rgba(255, 255, 255, 0.15);
+    color: var(--white);
+}
+
+.rest-day-note {
+    margin: 0.25rem 0 0;
+    font-size: 1rem;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.9);
+    text-align: center;
+
+}
+
+.rest-day-body {
+    margin: 0.5rem 0 0;
+    font-size: 0.90rem;
+    color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+}
+
+.topic-status {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.25rem;
+}
+
+.badge {
+    display: inline-block;
+    padding: 0.125rem 0.5rem;
+    font-size: 0.75rem;
+    border-radius: 9999px;
+    border: 1px solid transparent;
+    line-height: 1.25;
+}
+
+.badge-missed {
+    background: #fef2f2; /* rose-50 */
+    color: #991b1b;      /* rose-900 */
+    border-color: #fecaca; /* rose-200 */
 }
