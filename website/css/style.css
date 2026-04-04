@@ -14,12 +14,7 @@
     --amber: #fbbf24;
     --rose: #fb7185;
     /* Security */
-    /* Terraform */
-    --terraform: #623ce4;
-    /* Muted terraform shade */
-    --terraform-muted: color-mix(in srgb, var(--terraform) 55%, var(--navy) 45%);
-    --terraform-solid: color-mix(in srgb, var(--navy) 86%, #3b245e 14%);
-    --terraform-bg: color-mix(in srgb, var(--terraform-solid) 88%, transparent 12%);
+    /* Terraform topic removed from site — variables retired */
 
     /* Surfaces */
     --surface-1: #ffffff;
@@ -57,11 +52,7 @@
         /* Fallback for rest day background */
         --rest-day-bg-solid: #2a203e;
         --rest-day-bg: rgba(42, 32, 62, 0.86);
-        /* Terraform fallbacks */
-        --terraform: #623ce4;
-        --terraform-muted: #7159d9;
-        --terraform-solid: #3b245e;
-        --terraform-bg: rgba(59, 36, 94, 0.86);
+        /* Terraform removed — no fallbacks required */
     }
 }
 
@@ -477,7 +468,7 @@ header {
     max-width: 460px;
 }
 
-.dev_ops-topic-card {
+.sysadmin-topic-card {
     background: linear-gradient(145deg, #6ee7b7, #0f6f56);
     width: 100%;
     max-width: 460px;
@@ -487,12 +478,7 @@ header {
     background: var(--rose);
 }
 
-/* Terraform topic card */
-.terraform-topic-card {
-    background: linear-gradient(145deg, #6b4ff0, #3b2aa6);
-    width: 100%;
-    max-width: 460px;
-}
+/* Terraform topic removed from site */
 
 .update-card {
     background: linear-gradient(160deg, var(--surface-2), var(--surface-3));
@@ -777,6 +763,7 @@ header {
     border-left: 6px solid var(--blue);
 }
 
+.topic-sysadmin,
 .topic-devops {
     border-left: 6px solid var(--green);
 }
@@ -785,9 +772,7 @@ header {
     border-left: 6px solid var(--rose);
 }
 
-.topic-terraform {
-    border-left: 6px solid var(--terraform);
-}
+/* topic-terraform removed */
 
 /* Topic page */
 .topic-page {
@@ -1008,7 +993,7 @@ header {
 
     /* Optional colorful hover chips */
     .nav-links .aws-li,
-    .nav-links .dev_ops-li,
+    .nav-links .sysadmin-li,
     .nav-links .security-li {
         width: 75%;
         margin: 0.25rem auto;
@@ -1029,7 +1014,7 @@ header {
         color: var(--white);
     }
 
-    .nav-links .dev_ops-li:hover {
+    .nav-links .sysadmin-li:hover {
         background: var(--green);
     }
 
